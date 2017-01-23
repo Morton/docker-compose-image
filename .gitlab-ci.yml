@@ -9,3 +9,5 @@ build:
     - docker push gitlab.technopolis.de/morton/docker-compose-image
   tags:
     - docker
+  only:
+    - master
