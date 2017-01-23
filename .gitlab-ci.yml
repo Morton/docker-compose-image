@@ -1,13 +1,19 @@
 stages:
   - build
+  - deploy
 
 build:
   stage: build
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.technopolis.de
     - docker build -t gitlab.technopolis.de/morton/docker-compose-image .
-    - docker push gitlab.technopolis.de/morton/docker-compose-image
   tags:
     - docker
+
+push:
+  stage: deploy
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN gitlab.technopolis.de
+    - docker push gitlab.technopolis.de/morton/docker-compose-image
   only:
     - master
